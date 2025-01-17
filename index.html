@@ -10,16 +10,19 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             height: 100vh;
-            background: linear-gradient(to bottom, #000000, #222222);
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 2s ease-in;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
 
         .container {
@@ -43,8 +46,8 @@
 
         .image-container {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 150px;
+            height: 150px;
             perspective: 1000px;
         }
 
@@ -69,15 +72,6 @@
             100% { transform: rotateY(360deg); }
         }
 
-        .link-lines {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 80%;
-            height: 80%;
-            transform: translate(-50%, -50%);
-        }
-
         .link {
             position: absolute;
             color: #ff4444;
@@ -91,69 +85,48 @@
             text-shadow: 0 0 20px rgba(255, 68, 68, 1);
         }
 
-        .line {
-            position: absolute;
-            width: 2px;
-            background: #ff4444;
-        }
-
         .telegram {
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .telegram-line {
-            top: 50%;
-            left: 50%;
-            height: 40%;
-            transform-origin: top;
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        .instagram {
-            bottom: 10%;
-            left: 30%;
+            top: 25%;
+            left: 36%;
             transform: translate(-50%, 100%);
         }
 
-        .instagram-line {
-            top: 50%;
-            left: 50%;
-            height: 50%;
-            transform-origin: top;
-            transform: translate(-50%, -50%) rotate(120deg);
+        .instagram {
+            bottom: 36%;
+            left: 36%;
+            transform: translate(-50%, 100%);
         }
 
         .x {
-            bottom: 10%;
-            right: 30%;
-            transform: translate(50%, 100%);
-        }
-
-        .x-line {
             top: 50%;
-            left: 50%;
-            height: 50%;
-            transform-origin: top;
-            transform: translate(-50%, -50%) rotate(-120deg);
+            left: 38%;
+            transform: translate(50%, 100%);
         }
     </style>
 </head>
 <body>
+    <video class="background-video" id="video" autoplay muted>
+        <source src="./videos/intro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <div class="container">
         <div class="title">$TONYDARK</div>
         <div class="image-container">
             <div class="coin"></div>
         </div>
-        <div class="link-lines">
-            <div class="line telegram-line"></div>
-            <a href="https://t.me/tonydarksol" class="link telegram" target="_blank">Telegram</a>
-            <div class="line instagram-line"></div>
-            <a href="https://www.instagram.com/tonydarkcoin/" class="link instagram" target="_blank">Instagram</a>
-            <div class="line x-line"></div>
-            <a href="https://x.com/tonydarksol" class="link x" target="_blank">X</a>
-        </div>
+        <a href="https://t.me/tonydarksol" class="link telegram" target="_blank">Telegram</a>
+        <a href="https://www.instagram.com/tonydarkcoin/" class="link instagram" target="_blank">Instagram</a>
+        <a href="https://x.com/tonydarksol" class="link x" target="_blank">X</a>
     </div>
+
+    <script>
+        const video = document.getElementById('video');
+
+        video.addEventListener('ended', () => {
+            video.src = './videos/loop.mp4';
+            video.loop = true;
+            video.play();
+        });
+    </script>
 </body>
 </html>
